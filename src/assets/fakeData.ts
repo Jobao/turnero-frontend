@@ -1,22 +1,23 @@
-export const fakeDataProfesional = {
-  idProfesional: 0,
-  servicios: [
-    { idServicio: 0, titulo: 'Pedicuria', descripcion: 'Cuidado de los pies' },
-    { idServicio: 1, titulo: 'Manicura', descripcion: '' }
-  ]
-}
-
-export const fakeDataTurnos = [
+export const fakeDataProfesional = [
   {
-    idServicio: 0,
-    turnos: [
-      { fecha: '22/10/2024', turnos: ['09:00', '09:30', '10:00'] },
-      { fecha: '23/10/2024', turnos: ['09:00', '09:30', '10:00'] },
-      { fecha: '22/10/2024', turnos: ['09:00', '10:00', '11:00'] }
+    idProfesional: 0,
+    nombre: 'Rogelio BuenDia',
+    descripcion: 'Estetica',
+    imageURL: '',
+    mapURL: 'https://www.google.com/maps/place/Mar+del+Plata,+Provincia+de+Buenos+Aires/@-38.022528,-57.6002758,11.5z/data=!4m6!3m5!1s0x9584d94d19d34209:0xdd9670804bfed126!8m2!3d-38.0054771!4d-57.5426106!16zL20vMDFwc3Y1?entry=ttu',
+    telefono: '542236703240',
+    servicios: [
+      {
+        idServicio: 0,
+        titulo: 'Pedicuria',
+        descripcion: 'Cuidado de los pies',
+        turnos: [
+          { fecha: '22/10/2024', turnos: ['09:00', '09:30', '10:00'] },
+          { fecha: '23/10/2024', turnos: ['09:00', '09:30', '10:00'] },
+          { fecha: '22/10/2024', turnos: ['09:00', '10:00', '11:00'] }
+        ]
+      },
+      { idServicio: 1, titulo: 'Manicura', descripcion: '', turnos: [] }
     ]
-  },
-  {
-    idServicio: 1,
-    turnos: []
   }
 ]
