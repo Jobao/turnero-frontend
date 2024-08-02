@@ -3,7 +3,7 @@ export const fakeDataProfesional = [
     idProfesional: 0,
     nombre: 'Rogelio BuenDia',
     descripcion: 'Estetica',
-    imageURL: '',
+    imageURL: 'https://randomuser.me/api/portraits/men/21.jpg',
     mapURL: 'https://www.google.com/maps/place/Mar+del+Plata,+Provincia+de+Buenos+Aires/@-38.022528,-57.6002758,11.5z/data=!4m6!3m5!1s0x9584d94d19d34209:0xdd9670804bfed126!8m2!3d-38.0054771!4d-57.5426106!16zL20vMDFwc3Y1?entry=ttu',
     telefono: '542236703240',
     servicios: [
@@ -19,5 +19,13 @@ export const fakeDataProfesional = [
       },
       { idServicio: 1, titulo: 'Manicura', descripcion: '', turnos: [] }
     ]
+  },
+  {
+    idProfesional: 1,
+    nombre: 'Pepe Argento',
+    descripcion: 'Zapatero',
+    imageURL: 'https://randomuser.me/api/portraits/men/20.jpg',
+    mapURL: '',
+    telefono: ''
   }
 ]
