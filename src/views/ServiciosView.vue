@@ -1,6 +1,6 @@
 <template>
   <div v-if="servicios" class="flex">
-    <div v-for="serv in servicios" class="mr-2">{{ serv.titulo }}</div>
+    <ServiceCardComponent v-for="serv in servicios" :title="serv.titulo" :descripcion="serv.descripcion"></ServiceCardComponent>
   </div>
 </template>
 
