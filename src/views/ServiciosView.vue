@@ -5,6 +5,7 @@
     :descripcion="serv.descripcion" 
     :idServicio="serv.idServicio" 
     :onSelect="seleccionServicio"
+    :select="serv.idServicio === seleccionado"
     :key="serv.idServicio">
 
     </ServiceCardComponent>
