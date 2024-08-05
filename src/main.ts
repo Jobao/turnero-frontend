@@ -6,6 +6,8 @@ import './index.css'
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
 
+import DatePicker from 'primevue/datepicker'
+
 const app = createApp(App)
 
 app.use(createPinia())
@@ -15,5 +17,6 @@ app.use(PrimeVue, {
     preset: Aura
   }
 })
+app.component('datePicker', DatePicker)
 
 app.mount('#app')
