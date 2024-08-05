@@ -45,6 +45,7 @@ function getProfesional(profesionalID: number) {
   if (profesional) {
     servicios.value = profesional.servicios
   }
+  useServiciosStore().profesional = profesional
   return profesional
 }
 
