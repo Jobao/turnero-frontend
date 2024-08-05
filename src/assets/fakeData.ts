@@ -16,7 +16,7 @@ export const fakeDataProfesional: ProfesionalType[] = [
         turnos: [
           { fecha: '22/10/2024', turnos: ['09:00', '09:30', '10:00'] },
           { fecha: '23/10/2024', turnos: ['09:00', '09:30', '10:00'] },
-          { fecha: '22/10/2024', turnos: ['09:00', '10:00', '11:00'] }
+          { fecha: '24/10/2024', turnos: ['18:00', '19:00', '20:00'] }
         ]
       },
       { servicioID: 1, titulo: 'Manicura', descripcion: '', turnos: [] }
