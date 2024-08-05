@@ -5,5 +5,10 @@ import type { ProfesionalType } from '@/types/types'
 export const useServiciosStore = defineStore('servicio', () => {
   const servicioSeleccionado = ref(-1)
   const currentProfesional = ref<ProfesionalType>()
-  return { servicioSeleccionado, profesional: currentProfesional }
+
+  function clearStore() {
+    servicioSeleccionado.value = -1
+    currentProfesional.value = undefined
+  }
+  return { servicioSeleccionado, currentProfesional, clearStore }
 })
