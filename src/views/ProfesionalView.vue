@@ -1,20 +1,25 @@
 <template>
-  <ProfesionalCardComponent v-if="prof" :profesional="{ idProfesional: prof.profesionalID, nombre: prof.nombre, descripcion: prof.descripcion, imageURL: prof.imageURL, mapURL: prof.mapURL, telefono: prof.telefono }"></ProfesionalCardComponent>
+  <ProfesionalCardComponent
+    v-if="profesionalCurrent"
+    :profesional="{ idProfesional: profesionalCurrent.profesionalID, nombre: profesionalCurrent.nombre, descripcion: profesionalCurrent.descripcion, imageURL: profesionalCurrent.imageURL, mapURL: profesionalCurrent.mapURL, telefono: profesionalCurrent.telefono }"
+  ></ProfesionalCardComponent>
 </template>
 
 <script setup lang="ts">
-import { fakeDataProfesional } from '@/assets/fakeData'
 import { useRoute } from 'vue-router'
 import ProfesionalCardComponent from '@/components/ProfesionalCardComponent.vue'
-import { ref } from 'vue';
+import type { ProfesionalType } from '@/types/types'
+import { useServiciosStore } from '@/stores/servicioStore'
+import { API } from '@/assets/api'
 
 const route = useRoute()
+let profesionalCurrent: ProfesionalType | undefined
 
-const prof = ref(getProfesional(Number(route.params.profesionalID)))
-function getProfesional(profesionalID: number) {
-  return fakeDataProfesional.find((profesional) => {
-    return profesional.profesionalID === profesionalID
-  })
+if (useServiciosStore().currentProfesional) {
+  if (useServiciosStore().currentProfesional?.profesionalID !== Number(route.params.profesionalID)) {
+    profesionalCurrent = API.local.getProfesional(Number(route.params.profesionalID))
+  }
+} else {
+  profesionalCurrent = API.local.getProfesional(Number(route.params.profesionalID))
 }
-
 </script>

@@ -23,17 +23,14 @@
 </template>
 
 <script setup lang="ts">
-import { useServiciosStore } from '@/stores/servicioStore'
 import WhatsappButtonComponent from './WhatsappButtonComponent.vue'
 
-import router from '@/router'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 const props = defineProps<{ profesional: profType }>()
 
-const store = useServiciosStore()
-const router2 = useRouter()
+const router = useRouter()
 function toServiciosPage() {
-  router2.push('/' + props.profesional.idProfesional + '/servicios')
+  router.push('/' + props.profesional.idProfesional + '/servicios')
 }
 
 export type profType = {
