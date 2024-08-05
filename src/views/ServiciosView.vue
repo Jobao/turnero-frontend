@@ -1,35 +1,51 @@
 <template>
-  <div v-if="servicios" class="flex">
-    <ServiceCardComponent v-for="serv in servicios" 
-    :title="serv.titulo" 
-    :descripcion="serv.descripcion" 
-    :idServicio="serv.idServicio" 
-    :onSelect="seleccionServicio"
-    :select="serv.idServicio === seleccionado"
-    :key="serv.idServicio">
+  <div v-if="profesionalState">
+    <div v-if="servicios && servicios.length > 0" class="flex">
+      <ServiceCardComponent v-for="servicioItem in servicios" 
+      :title="servicioItem.titulo" 
+      :descripcion="servicioItem.descripcion" 
+      :idServicio="servicioItem.servicioID" 
+      :onSelect="seleccionServicio"
+      :select="servicioItem.servicioID === seleccionado"
+      :key="servicioItem.servicioID">
 
-    </ServiceCardComponent>
+      </ServiceCardComponent>
 
-    <button class=" px-4 py-2 rounded-full" :class="siguienteButtonClass">Siguiente</button>
+      <button class=" px-4 py-2 rounded-full" :class="siguienteButtonClass">Siguiente</button>
+    </div>
+
+    <div v-else>
+      <p>No existen servicios para el profesional</p>
+    </div>
   </div>
+  <div v-else>
+    <p>No existe el profesional elegido</p>
+  </div>
+ 
 </template>
 
 <script setup lang="ts">
-import { fakeDataProfesional } from '@/assets/fakeData'
+import { fakeDataProfesional,  } from '@/assets/fakeData'
 import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import ServiceCardComponent from '@/components/ServiceCardComponent.vue'
+import type { ServicioType } from '@/types/types';
 
 const route = useRoute()
 const seleccionado = ref(-1)
+const servicios = ref<ServicioType[]>()
+const profesionalState = ref(getProfesional(Number(route.params.profesionalID)))
 
-const servicios = ref(getServicios(Number(route.params.profesionalID)))
-function getServicios(profesionalID: number) {
+
+function getProfesional(profesionalID: number){
+  
   let profesional = fakeDataProfesional.find((prof) => {
-    return prof.idProfesional === profesionalID
+    return prof.profesionalID === profesionalID
   })
-
-  return profesional?.servicios
+  if(profesional){
+    servicios.value = profesional.servicios
+  }
+  return profesional;
 }
 
 function seleccionServicio(servicioID: number) {
@@ -38,7 +54,6 @@ function seleccionServicio(servicioID: number) {
   } else {
     seleccionado.value = servicioID
   }
-  console.log(seleccionado.value);
 }
 
 const siguienteButtonClass = computed({

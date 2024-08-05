@@ -1,6 +1,8 @@
-export const fakeDataProfesional = [
+import type { ProfesionalType } from '@/types/types'
+
+export const fakeDataProfesional: ProfesionalType[] = [
   {
-    idProfesional: 0,
+    profesionalID: 0,
     nombre: 'Rogelio BuenDia',
     descripcion: 'Estetica',
     imageURL: 'https://randomuser.me/api/portraits/men/21.jpg',
@@ -8,7 +10,7 @@ export const fakeDataProfesional = [
     telefono: '542236703240',
     servicios: [
       {
-        idServicio: 0,
+        servicioID: 0,
         titulo: 'Pedicuria',
         descripcion: 'Cuidado de los pies',
         turnos: [
@@ -17,15 +19,16 @@ export const fakeDataProfesional = [
           { fecha: '22/10/2024', turnos: ['09:00', '10:00', '11:00'] }
         ]
       },
-      { idServicio: 1, titulo: 'Manicura', descripcion: '', turnos: [] }
+      { servicioID: 1, titulo: 'Manicura', descripcion: '', turnos: [] }
     ]
   },
   {
-    idProfesional: 1,
+    profesionalID: 1,
     nombre: 'Pepe Argento',
     descripcion: 'Zapatero',
     imageURL: 'https://randomuser.me/api/portraits/men/20.jpg',
     mapURL: '',
-    telefono: ''
+    telefono: '',
+    servicios: []
   }
 ]
