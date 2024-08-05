@@ -11,7 +11,8 @@
 
       </ServiceCardComponent>
 
-      <button class=" px-4 py-2 rounded-full" :class="siguienteButtonClass">Siguiente</button>
+      <button class=" px-4 py-2 rounded-full" :class="siguienteButtonClass" 
+      @click="toTurnosView()">Siguiente</button>
     </div>
 
     <div v-else>
@@ -27,11 +28,12 @@
 <script setup lang="ts">
 import { fakeDataProfesional,  } from '@/assets/fakeData'
 import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import ServiceCardComponent from '@/components/ServiceCardComponent.vue'
 import type { ServicioType } from '@/types/types';
 
 const route = useRoute()
+const router = useRouter()
 const seleccionado = ref(-1)
 const servicios = ref<ServicioType[]>()
 const profesionalState = ref(getProfesional(Number(route.params.profesionalID)))
@@ -67,6 +69,11 @@ const siguienteButtonClass = computed({
   set:(val)=>{}
   
 })
+
+function toTurnosView(){
+
+  router.push(route.fullPath + '/' + seleccionado.value)
+}
 
 
 </script>

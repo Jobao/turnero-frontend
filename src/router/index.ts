@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue'
 import ProfesionalView from '@/views/ProfesionalView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import ServiciosView from '@/views/ServiciosView.vue'
+import TurnosView from '@/views/TurnosView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/:profesionalID/servicios',
       name: 'serviciosView',
       component: ServiciosView
+    },
+    {
+      path: '/:profesionalID/servicios/:servicioID',
+      name: 'turnoView',
+      component: TurnosView
     },
     {
       path: '/:pathMatch(.*)*',
