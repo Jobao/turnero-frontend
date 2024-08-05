@@ -15,6 +15,8 @@ import { API } from '@/assets/api'
 const route = useRoute()
 let profesionalCurrent: ProfesionalType | undefined
 
+function profesionalSeleccionado() {}
+
 if (useServiciosStore().currentProfesional) {
   if (useServiciosStore().currentProfesional?.profesionalID !== Number(route.params.profesionalID)) {
     profesionalCurrent = API.local.getProfesional(Number(route.params.profesionalID))
