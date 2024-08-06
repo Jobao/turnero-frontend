@@ -15,5 +15,5 @@ git init
 git add -A
 git commit -m 'deploy'
 
-git push -f git@github.com:Jobao/turnero-frontend.git main:gh-pages
+git push -f git@github.com:Jobao/turnero-frontend.git gh-pages
 #cd -
