@@ -10,7 +10,7 @@
 
   <div>
     <DatePickerCarrouselComponent :howManyDaysShow="5" :firstDateShow="new Date()" :minDate="new Date(2023, 11, 5)"></DatePickerCarrouselComponent>
-    <DatePickerCarrouselComponent :howManyDaysShow="5" :firstDateShow="new Date()" :maxDate="new Date(2025, 0, 5)"></DatePickerCarrouselComponent>
+    <DatePickerCarrouselComponent :howManyDaysShow="5" :firstDateShow="new Date()" :maxDate="new Date(2023, 0, 4)"></DatePickerCarrouselComponent>
     <DatePickerCarrouselComponent :howManyDaysShow="12" :firstDateShow="new Date()" :minDate="new Date(2023, 11, 5)"></DatePickerCarrouselComponent>
   </div>
 </template>
