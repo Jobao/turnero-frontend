@@ -9,7 +9,8 @@
   </div>
 
   <div>
-    <DatePickerCarrouselComponent :howManyDaysShow="5" :firstDateShow="new Date()" preventPast></DatePickerCarrouselComponent>
+    <DatePickerCarrouselComponent :howManyDaysShow="5" :firstDateShow="new Date()" :minDate="new Date(2025, 9, 5)"></DatePickerCarrouselComponent>
+    <DatePickerCarrouselComponent :howManyDaysShow="5" :firstDateShow="new Date()"></DatePickerCarrouselComponent>
   </div>
 </template>
 

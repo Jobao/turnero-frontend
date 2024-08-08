@@ -40,6 +40,10 @@ const props = defineProps<{
 const currentFirstDayToShow = ref<Dayjs>(dayjs(props.firstDateShow))
 const firstDayToShow = ref<Dayjs>(dayjs(props.firstDateShow))
 const currentMonth = ref(currentFirstDayToShow.value.month())
+
+const minDayJS = dayjs(props.minDate)
+const maxDayJS = dayjs(props.maxDate)
+
 const timezone = dayjs.tz.guess()
 //Control
 const disablePreviousDay = ref(false)
@@ -47,10 +51,13 @@ const disableNextDay = ref(false)
 
 const disablePreviousMonth = ref(false)
 const disableNextMonth = ref(false)
-
-if (props.preventPast) {
+//SETUP
+if (props.minDate) {
   disablePreviousMonth.value = true
   disablePreviousDay.value = true
+  if (currentFirstDayToShow.value.isBefore(minDayJS)) {
+    currentFirstDayToShow.value = minDayJS
+  }
 }
 
 function nextDay() {
@@ -68,8 +75,8 @@ function nextDay() {
 function previousDay() {
   if (currentFirstDayToShow.value.date() >= 2) {
     currentFirstDayToShow.value = currentFirstDayToShow.value.subtract(1, 'day')
-    if (props.preventPast) {
-      if (currentFirstDayToShow.value.isSameOrBefore(firstDayToShow.value)) {
+    if (props.minDate) {
+      if (currentFirstDayToShow.value.isSameOrBefore(minDayJS)) {
         disablePreviousDay.value = true
       }
     }
@@ -95,7 +102,6 @@ function nextMonth() {
 
 function controlMonthChange() {
   const diff = calculateDaysDiff()
-  console.log(diff)
 
   if (diff > 0) {
     currentFirstDayToShow.value = currentFirstDayToShow.value.subtract(diff - 1, 'day')
@@ -105,11 +111,14 @@ function controlMonthChange() {
   if (currentFirstDayToShow.value.date() + props.howManyDaysShow <= currentFirstDayToShow.value.daysInMonth()) {
     disableNextDay.value = false
   }
-  if (props.preventPast) {
-    if (currentFirstDayToShow.value.isSameOrBefore(firstDayToShow.value)) {
+  if (props.minDate) {
+    if (currentFirstDayToShow.value.isSameOrBefore(minDayJS)) {
       disablePreviousMonth.value = true
       disablePreviousDay.value = true
-      currentFirstDayToShow.value = firstDayToShow.value
+      currentFirstDayToShow.value = minDayJS
+    }
+    if (currentFirstDayToShow.value.isSame(minDayJS, 'month')) {
+      disablePreviousMonth.value = true
     }
   }
 }
