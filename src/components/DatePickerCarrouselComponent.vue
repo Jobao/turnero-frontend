@@ -18,6 +18,9 @@
 </template>
 
 <script setup lang="ts">
+/**
+ * Falta implementar maxDate
+ */
 import dayjs, { Dayjs } from 'dayjs'
 import { computed, ref } from 'vue'
 import utc from 'dayjs/plugin/utc'
@@ -64,9 +67,9 @@ if (props.maxDate) {
   if (currentFirstDayToShow.value.isAfter(maxDayJS, 'day')) {
     if (maxDayJS.date() < currentHowManyDaysShow.value) {
       currentHowManyDaysShow.value = maxDayJS.date()
+      disablePreviousDay.value = true
     }
-    currentFirstDayToShow.value = maxDayJS.subtract(currentHowManyDaysShow.value - 1, 'day')
-    console.log(currentFirstDayToShow.value.date())
+    currentFirstDayToShow.value = maxDayJS.subtract(currentHowManyDaysShow.value - 1, 'day') 
 
     disableNextMonth.value = true
     disableNextDay.value = true
@@ -137,6 +140,9 @@ function controlMonthChange() {
     if (currentFirstDayToShow.value.isSame(minDayJS, 'month')) {
       disablePreviousMonth.value = true
     }
+  }
+  if(props.maxDate){
+
   }
 }
 
