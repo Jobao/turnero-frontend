@@ -1,5 +1,4 @@
 <template>
-  <div></div>
   <div class="max-w-sm mx-auto bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg">
     <h2 class="flex justify-center font-bold">Profesionales</h2>
     <div class="flex mt-5 flex-col">
@@ -8,11 +7,16 @@
       }}</a>
     </div>
   </div>
+
+  <div>
+    <DatePickerCarrouselComponent :howManyDaysShow="25" :firstDateShow="new Date()"></DatePickerCarrouselComponent>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { fakeDataProfesional } from '@/assets/fakeData'
 import { useServiciosStore } from '@/stores/servicioStore'
+import DatePickerCarrouselComponent from '@/components/DatePickerCarrouselComponent.vue'
 
 useServiciosStore().clearStore()
 </script>
