@@ -53,11 +53,15 @@ const disablePreviousMonth = ref(false)
 const disableNextMonth = ref(false)
 //SETUP
 if (props.minDate) {
-  disablePreviousMonth.value = true
-  disablePreviousDay.value = true
-  if (currentFirstDayToShow.value.isBefore(minDayJS)) {
+  if (currentFirstDayToShow.value.isSameOrBefore(minDayJS)) {
     currentFirstDayToShow.value = minDayJS
+    disablePreviousMonth.value = true
+    disablePreviousDay.value = true
   }
+  /*disablePreviousMonth.value = true
+  disablePreviousDay.value = true*/
+}
+if (props.maxDate) {
 }
 
 function nextDay() {
@@ -76,7 +80,7 @@ function previousDay() {
   if (currentFirstDayToShow.value.date() >= 2) {
     currentFirstDayToShow.value = currentFirstDayToShow.value.subtract(1, 'day')
     if (props.minDate) {
-      if (currentFirstDayToShow.value.isSameOrBefore(minDayJS)) {
+      if (currentFirstDayToShow.value.isSameOrBefore(minDayJS, 'day')) {
         disablePreviousDay.value = true
       }
     }
@@ -112,7 +116,7 @@ function controlMonthChange() {
     disableNextDay.value = false
   }
   if (props.minDate) {
-    if (currentFirstDayToShow.value.isSameOrBefore(minDayJS)) {
+    if (currentFirstDayToShow.value.isSameOrBefore(minDayJS, 'day')) {
       disablePreviousMonth.value = true
       disablePreviousDay.value = true
       currentFirstDayToShow.value = minDayJS
