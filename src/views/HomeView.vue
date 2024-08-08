@@ -9,7 +9,7 @@
   </div>
 
   <div>
-    <DatePickerCarrouselComponent :howManyDaysShow="5" :firstDateShow="new Date()"></DatePickerCarrouselComponent>
+    <DatePickerCarrouselComponent :howManyDaysShow="5" :firstDateShow="new Date()" preventPast></DatePickerCarrouselComponent>
   </div>
 </template>
 

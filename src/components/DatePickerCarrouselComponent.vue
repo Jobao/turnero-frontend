@@ -1,13 +1,17 @@
 <template>
   <div>
     <table class="border-4 w-screen mx-auto">
-      <tr></tr>
       <tr>
-        <td><button @click="previousDay()" :disabled="disablePreviousDay"><</button></td>
+        <td><button @click="previousMonth()" class="w-full"><</button></td>
+        <td :colspan="props.howManyDaysShow">{{ currentFirstDayToShow.format('MMMM / YYYY') }}</td>
+        <td><button @click="nextMonth()" class="w-full">></button></td>
+      </tr>
+      <tr>
+        <td><button @click="previousDay()" :disabled="disablePreviousDay" class="w-full"><</button></td>
         <td v-for="n in props.howManyDaysShow">
-          <button :key="currentFirstDayToShow.add(n - 1, 'day').date()">{{ currentFirstDayToShow.add(n - 1, 'day').date() }}</button>
+          <button class="w-full" :key="currentFirstDayToShow.add(n - 1, 'day').date()">{{ currentFirstDayToShow.add(n - 1, 'day').date() }}</button>
         </td>
-        <td><button @click="nextDay()" :disabled="disableNextDay">></button></td>
+        <td><button @click="nextDay()" :disabled="disableNextDay" class="w-full">></button></td>
       </tr>
     </table>
   </div>
@@ -28,6 +32,7 @@ const props = defineProps<{
   preventPast?: boolean
   howManyDaysShow: number
   firstDateShow: Date
+  locale?: string
 }>()
 
 const currentFirstDayToShow = ref<Dayjs>(dayjs(props.firstDateShow))
@@ -39,11 +44,14 @@ const disablePreviousDay = ref(false)
 const disableNextDay = ref(false)
 
 function nextDay() {
-  if (currentFirstDayToShow.value.add(props.howManyDaysShow, 'day').month() === currentMonth.value) {
+  const diff = calculateDaysDiff()
+
+  if (diff <= 0) {
     currentFirstDayToShow.value = currentFirstDayToShow.value.add(1, 'day')
     disablePreviousDay.value = false
-  } else {
-    disableNextDay.value = true
+    if (diff === 0) {
+      disableNextDay.value = true
+    }
   }
 }
 
@@ -51,9 +59,36 @@ function previousDay() {
   if (currentFirstDayToShow.value.date() >= 2) {
     currentFirstDayToShow.value = currentFirstDayToShow.value.subtract(1, 'day')
     disableNextDay.value = false
-  } else {
-    disablePreviousDay.value = true
+    if (currentFirstDayToShow.value.date() === 1) {
+      disablePreviousDay.value = true
+    }
   }
+}
+
+function previousMonth() {
+  currentFirstDayToShow.value = currentFirstDayToShow.value.subtract(1, 'month')
+  currentMonth.value = currentFirstDayToShow.value.month()
+  controlMonthChange()
+}
+
+function nextMonth() {
+  currentFirstDayToShow.value = currentFirstDayToShow.value.add(1, 'month')
+  currentMonth.value = currentFirstDayToShow.value.month()
+  controlMonthChange()
+}
+
+function controlMonthChange() {
+  const diff = calculateDaysDiff()
+  if (diff > 0) {
+    currentFirstDayToShow.value = currentFirstDayToShow.value.subtract(diff - 1, 'day')
+  }
+  if (currentFirstDayToShow.value.date() + props.howManyDaysShow <= currentFirstDayToShow.value.daysInMonth()) {
+    disableNextDay.value = false
+  }
+}
+
+function calculateDaysDiff() {
+  return currentFirstDayToShow.value.date() + props.howManyDaysShow - currentFirstDayToShow.value.daysInMonth()
 }
 </script>
 
