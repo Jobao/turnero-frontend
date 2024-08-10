@@ -1,7 +1,7 @@
 <template>
   <ProfesionalCardComponent
     v-if="profesionalCurrent"
-    :profesional="{ idProfesional: profesionalCurrent.profesionalID, nombre: profesionalCurrent.nombre, descripcion: profesionalCurrent.descripcion, imageURL: profesionalCurrent.imageURL, mapURL: profesionalCurrent.mapURL, telefono: profesionalCurrent.telefono }"
+    :profesional="{ idProfesional: profesionalCurrent.professionalID, nombre: profesionalCurrent.name, descripcion: profesionalCurrent.description, imageURL: profesionalCurrent.imageURL, mapURL: profesionalCurrent.mapURL, telefono: profesionalCurrent.phone }"
   ></ProfesionalCardComponent>
 </template>
 
@@ -18,7 +18,7 @@ let profesionalCurrent: ProfesionalType | undefined
 function profesionalSeleccionado() {}
 
 if (useServiciosStore().currentProfesional) {
-  if (useServiciosStore().currentProfesional?.profesionalID !== Number(route.params.profesionalID)) {
+  if (useServiciosStore().currentProfesional?.professionalID !== Number(route.params.profesionalID)) {
     profesionalCurrent = API.local.getProfesional(Number(route.params.profesionalID))
   }
 } else {

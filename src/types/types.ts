@@ -1,21 +1,21 @@
 export type ProfesionalType = {
-  profesionalID: number
-  nombre: string
-  descripcion: string
+  professionalID: number
+  name: string
+  description: string
   imageURL: string
   mapURL: string
-  telefono: string
-  servicios: ServicioType[]
+  phone: string
+  services: ServiceType[]
 }
 
-export type ServicioType = {
-  servicioID: number
-  titulo: string
-  descripcion: string
-  turnos: TurnoType[]
+export type ServiceType = {
+  serviceID: number
+  title: string
+  description: string
+  shifts: ShiftType[]
 }
 
-export type TurnoType = {
-  fecha: string
-  turnos: string[]
+export type ShiftType = {
+  date: string
+  shedule: string[]
 }
