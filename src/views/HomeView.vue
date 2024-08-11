@@ -5,15 +5,18 @@
       <a v-for="prof in fakeDataProfesional" :href="'http://localhost:5173/' + prof.professionalID" class="flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2 m-2">{{ prof.name }}</a>
     </div>
   </div>
-  <ServiceShiftCardComponent :shifts="fakeDataProfesional[0].services[0].shifts" :locale="'es'"> </ServiceShiftCardComponent>
 
   <div></div>
 </template>
 
 <script setup lang="ts">
 import { fakeDataProfesional } from '@/assets/fakeData'
-import { useServiciosStore } from '@/stores/servicioStore'
+import { useServiciosStore } from '@/stores/serviceStore'
 import ServiceShiftCardComponent from '@/components/ServiceShiftCardComponent.vue'
 
 useServiciosStore().clearStore()
+
+/**
+ * <ServiceShiftCardComponent :shifts="fakeDataProfesional[0].services[0].shifts" :locale="'es'"> </ServiceShiftCardComponent>
+ */
 </script>

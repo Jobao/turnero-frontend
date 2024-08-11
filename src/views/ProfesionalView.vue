@@ -1,7 +1,7 @@
 <template>
   <ProfesionalCardComponent
-    v-if="profesionalCurrent"
-    :profesional="{ idProfesional: profesionalCurrent.professionalID, nombre: profesionalCurrent.name, descripcion: profesionalCurrent.description, imageURL: profesionalCurrent.imageURL, mapURL: profesionalCurrent.mapURL, telefono: profesionalCurrent.phone }"
+    v-if="currentProfessional"
+    :profesional="{ professionalID: currentProfessional.professionalID, name: currentProfessional.name, description: currentProfessional.description, imageURL: currentProfessional.imageURL, mapURL: currentProfessional.mapURL, phone: currentProfessional.phone }"
   ></ProfesionalCardComponent>
 </template>
 
@@ -9,19 +9,24 @@
 import { useRoute } from 'vue-router'
 import ProfesionalCardComponent from '@/components/ProfesionalCardComponent.vue'
 import type { ProfesionalType } from '@/types/types'
-import { useServiciosStore } from '@/stores/servicioStore'
+import { useServiciosStore } from '@/stores/serviceStore'
 import { API } from '@/assets/api'
 
 const route = useRoute()
-let profesionalCurrent: ProfesionalType | undefined
+let currentProfessional: ProfesionalType | undefined
 
-function profesionalSeleccionado() {}
-
-if (useServiciosStore().currentProfesional) {
-  if (useServiciosStore().currentProfesional?.professionalID !== Number(route.params.profesionalID)) {
-    profesionalCurrent = API.local.getProfesional(Number(route.params.profesionalID))
+function getProfesional() {
+  if (useServiciosStore().currentProfesional) {
+    if (useServiciosStore().currentProfesional?.professionalID !== Number(route.params.profesionalID)) {
+      currentProfessional = API.local.getProfesional(Number(route.params.profesionalID))
+    }
+  } else {
+    currentProfessional = API.local.getProfesional(Number(route.params.profesionalID))
   }
-} else {
-  profesionalCurrent = API.local.getProfesional(Number(route.params.profesionalID))
+  if (currentProfessional) {
+    useServiciosStore().currentProfesional = currentProfessional
+  }
 }
+
+getProfesional()
 </script>

@@ -3,12 +3,12 @@ import { defineStore } from 'pinia'
 import type { ProfesionalType } from '@/types/types'
 
 export const useServiciosStore = defineStore('servicio', () => {
-  const servicioSeleccionado = ref(-1)
+  const selectedService = ref(-1)
   const currentProfesional = ref<ProfesionalType>()
 
   function clearStore() {
-    servicioSeleccionado.value = -1
+    selectedService.value = -1
     currentProfesional.value = undefined
   }
-  return { servicioSeleccionado, currentProfesional, clearStore }
+  return { selectedService: selectedService, currentProfesional, clearStore }
 })

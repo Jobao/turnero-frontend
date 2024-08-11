@@ -5,7 +5,7 @@ export type ProfesionalType = {
   imageURL: string
   mapURL: string
   phone: string
-  services: ServiceType[]
+  services?: ServiceType[]
 }
 
 export type ServiceType = {
