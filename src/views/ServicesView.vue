@@ -1,7 +1,7 @@
 <template>
   <div v-if="profesionalState">
     <div v-if="profesionalState.services && profesionalState.services.length > 0" class="flex">
-      <ServiceCardComponent v-for="serviceItem in profesionalState.services" :title="serviceItem.title" :descripcion="serviceItem.description" :idServicio="serviceItem.serviceID" :onSelect="seleccionServicio" :select="serviceItem.serviceID === selectedService" :key="serviceItem.serviceID">
+      <ServiceCardComponent v-for="serviceItem in profesionalState.services" :title="serviceItem.title" :descripcion="serviceItem.description" :idServicio="serviceItem.serviceID" :onSelect="serviceSelection" :select="serviceItem.serviceID === selectedService" :key="serviceItem.serviceID">
       </ServiceCardComponent>
 
       <button class="px-4 py-2 rounded-full" :class="siguienteButtonClass" @click="toTurnosView()">{{ localeData.getLocale('es').NEXT_BUTTON }}</button>
@@ -48,11 +48,11 @@ function getProfesional() {
 
 getProfesional()
 
-function seleccionServicio(servicioID: number) {
-  if (servicioID === selectedService.value) {
+function serviceSelection(serviceID: number) {
+  if (serviceID === selectedService.value) {
     selectedService.value = -1
   } else {
-    selectedService.value = servicioID
+    selectedService.value = serviceID
   }
   useServiciosStore().selectedService = selectedService.value
 }

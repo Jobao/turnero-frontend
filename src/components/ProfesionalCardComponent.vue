@@ -25,7 +25,6 @@
 <script setup lang="ts">
 import type { ProfesionalType } from '@/types/types'
 import WhatsappButtonComponent from './WhatsappButtonComponent.vue'
-import { useServiciosStore } from '@/stores/serviceStore'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

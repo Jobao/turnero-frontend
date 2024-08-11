@@ -12,7 +12,6 @@
 <script setup lang="ts">
 import { fakeDataProfesional } from '@/assets/fakeData'
 import { useServiciosStore } from '@/stores/serviceStore'
-import ServiceShiftCardComponent from '@/components/ServiceShiftCardComponent.vue'
 
 useServiciosStore().clearStore()
 

@@ -11,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import { useServiciosStore } from '@/stores/serviceStore'
 import DatePicker from 'primevue/datepicker'
 import { ref } from 'vue'
 
