@@ -1,25 +1,36 @@
 <template>
-  <div class="flex divide-x-8">
-    <DatePicker class="pl-4 pr-4" v-model="date" inline :minDate="minDate" v-on:date-select="prueba()" />
-    <div class="pl-4">
-      <div v-if="date">
-        <span>HOla</span>
-      </div>
-      <div v-else>Seleccione Fecha</div>
-    </div>
+  <div v-if="profesionalState?.services !== undefined">
+    <ServiceShiftCardComponent :shifts="profesionalState.services[selectedService].shifts" :locale="'es'"> </ServiceShiftCardComponent>
   </div>
 </template>
 
 <script setup lang="ts">
-import DatePicker from 'primevue/datepicker'
+import { API } from '@/assets/api'
+import { useServiciosStore } from '@/stores/serviceStore'
+import type { ProfesionalType } from '@/types/types'
 import { ref } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import ServiceShiftCardComponent from '@/components/ServiceShiftCardComponent.vue'
+const route = useRoute()
+const router = useRouter()
+const selectedService = ref(Number(route.params.serviceID))
+const profesionalState = ref<ProfesionalType>()
 
-let minDate = new Date()
-minDate.setDate(minDate.getDate() + 1)
+function getProfesional() {
+  const profesionalID = Number(route.params.profesionalID)
 
-const date = ref<Date>()
-
-function prueba() {
-  //console.log(date.value.)
+  if (useServiciosStore().currentProfesional) {
+    if (useServiciosStore().currentProfesional?.professionalID !== profesionalID) {
+      profesionalState.value = API.local.getProfesional(Number(route.params.profesionalID))
+      useServiciosStore().currentProfesional = profesionalState.value
+    } else {
+      profesionalState.value = useServiciosStore().currentProfesional
+    }
+  } else {
+    profesionalState.value = API.local.getProfesional(profesionalID)
+    useServiciosStore().currentProfesional = profesionalState.value
+  }
 }
+
+getProfesional()
 </script>

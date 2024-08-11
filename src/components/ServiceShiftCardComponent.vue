@@ -72,4 +72,5 @@ function selectButtonShedule(key: string) {
 function defineLocale() {
   return props.locale ? props.locale : 'en'
 }
+console.log(props.shifts)
 </script>
