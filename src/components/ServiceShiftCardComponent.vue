@@ -6,11 +6,11 @@
         <div>{{ dayjs(shifts.date, 'DD/MM/YYYY').locale(currentLocale).format('dddd') }}</div>
       </div>
       <div>
-        <p>Turnos disponibles</p>
+        <p>{{ localeData.getLocale(currentLocale).AVALIABLE_SHIFTS }}</p>
         <button v-for="shedule in shifts.shedule" class="border m-1 bg-gray-300" :key="shifts.date + shedule" :class="isSelectedButtonShedule(shifts.date + '||' + shedule) ? 'bg-green-300' : ''" @click="selectButtonShedule(shifts.date + '||' + shedule)">{{ shedule }}</button>
       </div>
       <div class="self-center align-middle items-center pl-2">
-        <button class="border-2" :class="generateNextButtonClassStyle(shifts.date)">Reservar</button>
+        <button class="border-2" :class="generateNextButtonClassStyle(shifts.date)" @click="toSummaryPage()">Reservar</button>
       </div>
     </div>
   </div>
@@ -23,16 +23,23 @@ const props = defineProps<{
 }>()
 
 import type { ShiftType } from '@/types/types'
+import { localeData } from '@/assets/localeData'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import 'dayjs/locale/es'
 import 'dayjs/locale/br'
 import { computed, ref } from 'vue'
+import { useServiciosStore } from '@/stores/serviceStore'
+import { routes } from 'vue-router/auto-routes'
+import { useRoute, useRouter } from 'vue-router'
+
 dayjs.extend(customParseFormat)
 
 const currentLocale = ref(defineLocale())
 const selectedButtonShedule = ref('')
 const selectedDateGroup = ref('')
+const route = useRoute()
+const router = useRouter()
 
 const splitter = '||'
 
@@ -64,13 +71,21 @@ function selectButtonShedule(key: string) {
     } else {
       selectedButtonShedule.value = key
       selectedDateGroup.value = key.split(splitter)[0]
-      console.log(selectedDateGroup.value)
     }
   }
 }
 
 function defineLocale() {
-  return props.locale ? props.locale : 'en'
+  return props.locale ? props.locale : 'es'
 }
-console.log(props.shifts)
+
+function toSummaryPage() {
+  const aux = selectedDateGroup.value.split(splitter)
+  useServiciosStore().currentShift = {
+    date: aux[0],
+    shedule: aux[1]
+  }
+
+  router.push(route.fullPath + '/' + 'summary')
+}
 </script>

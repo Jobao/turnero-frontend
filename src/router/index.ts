@@ -4,6 +4,7 @@ import ProfesionalView from '@/views/ProfesionalView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import ServicesView from '@/views/ServicesView.vue'
 import ShiftView from '@/views/ShiftView.vue'
+import SummaryView from '@/views/SummaryView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +28,11 @@ const router = createRouter({
       path: '/:profesionalID/service/:serviceID',
       name: 'shiftView',
       component: ShiftView
+    },
+    {
+      path: '/:profesionalID/service/:serviceID/summary',
+      name: 'summaryView',
+      component: SummaryView
     },
     {
       path: '/:pathMatch(.*)*',
