@@ -38,6 +38,7 @@ dayjs.extend(customParseFormat)
 const currentLocale = ref(defineLocale())
 const selectedButtonShedule = ref('')
 const selectedDateGroup = ref('')
+const selectedShift = ref('')
 const route = useRoute()
 const router = useRouter()
 
@@ -71,6 +72,7 @@ function selectButtonShedule(key: string) {
     } else {
       selectedButtonShedule.value = key
       selectedDateGroup.value = key.split(splitter)[0]
+      selectedShift.value = key.split(splitter)[1]
     }
   }
 }
@@ -80,10 +82,9 @@ function defineLocale() {
 }
 
 function toSummaryPage() {
-  const aux = selectedDateGroup.value.split(splitter)
   useServiciosStore().currentShift = {
-    date: aux[0],
-    shedule: aux[1]
+    date: selectedDateGroup.value,
+    shedule: selectedShift.value
   }
 
   router.push(route.fullPath + '/' + 'summary')

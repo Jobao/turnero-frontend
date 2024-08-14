@@ -36,13 +36,17 @@ function getProfesional() {
   if (useServiciosStore().currentProfesional) {
     if (useServiciosStore().currentProfesional?.professionalID !== profesionalID) {
       profesionalState.value = API.local.getProfesional(Number(route.params.profesionalID))
-      useServiciosStore().currentProfesional = profesionalState.value
+      if (profesionalState.value) {
+        useServiciosStore().currentProfesional = profesionalState.value
+      }
     } else {
       profesionalState.value = useServiciosStore().currentProfesional
     }
   } else {
     profesionalState.value = API.local.getProfesional(profesionalID)
-    useServiciosStore().currentProfesional = profesionalState.value
+    if (profesionalState.value) {
+      useServiciosStore().currentProfesional = profesionalState.value
+    }
   }
 }
 

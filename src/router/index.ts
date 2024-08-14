@@ -5,6 +5,7 @@ import NotFoundView from '@/views/NotFoundView.vue'
 import ServicesView from '@/views/ServicesView.vue'
 import ShiftView from '@/views/ShiftView.vue'
 import SummaryView from '@/views/SummaryView.vue'
+import { useServiciosStore } from '@/stores/serviceStore'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,33 @@ const router = createRouter({
       component: NotFoundView
     }
   ]
+})
+
+router.beforeEach((to, from) => {
+  console.log(to)
+  console.log(from)
+  if (!from.name) {
+    //Si entro desde la URL
+    if (to.params.profesionalID) {
+      if (to.params.profesionalID === useServiciosStore().currentProfesional.professionalID.toString()) {
+        console.log('igual')
+      } else {
+        console.log('diferente')
+      }
+    }
+  }
+  /*
+  if (to.params.profesionalID) {
+    if (from.params.profesionalID) {
+      if (from.params.profesionalID === to.params.profesionalID) {
+        return true
+      } else {
+        router.push('/')
+      }
+    }
+  }
+*/
+  return true
 })
 
 export default router

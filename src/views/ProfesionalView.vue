@@ -1,7 +1,15 @@
 <template>
   <ProfesionalCardComponent
-    v-if="currentProfessional"
-    :profesional="{ professionalID: currentProfessional.professionalID, name: currentProfessional.name, description: currentProfessional.description, imageURL: currentProfessional.imageURL, mapURL: currentProfessional.mapURL, phone: currentProfessional.phone }"
+    v-if="profesionalState"
+    :profesional="{
+      professionalID: profesionalState.professionalID,
+      name: profesionalState.name,
+      description: profesionalState.description,
+      imageURL: profesionalState.imageURL,
+      mapURL: profesionalState.mapURL,
+      phone: profesionalState.phone,
+      services: profesionalState.services
+    }"
   ></ProfesionalCardComponent>
 </template>
 
@@ -11,20 +19,29 @@ import ProfesionalCardComponent from '@/components/ProfesionalCardComponent.vue'
 import type { ProfesionalType } from '@/types/types'
 import { useServiciosStore } from '@/stores/serviceStore'
 import { API } from '@/assets/api'
+import { ref } from 'vue'
 
 const route = useRoute()
-let currentProfessional: ProfesionalType | undefined
+let currentProfessional: ProfesionalType
+const profesionalState = ref<ProfesionalType>()
 
 function getProfesional() {
+  const profesionalID = Number(route.params.profesionalID)
+
   if (useServiciosStore().currentProfesional) {
-    if (useServiciosStore().currentProfesional?.professionalID !== Number(route.params.profesionalID)) {
-      currentProfessional = API.local.getProfesional(Number(route.params.profesionalID))
+    if (useServiciosStore().currentProfesional?.professionalID !== profesionalID) {
+      profesionalState.value = API.local.getProfesional(Number(route.params.profesionalID))
+      if (profesionalState.value) {
+        useServiciosStore().currentProfesional = profesionalState.value
+      }
+    } else {
+      profesionalState.value = useServiciosStore().currentProfesional
     }
   } else {
-    currentProfessional = API.local.getProfesional(Number(route.params.profesionalID))
-  }
-  if (currentProfessional) {
-    useServiciosStore().currentProfesional = currentProfessional
+    profesionalState.value = API.local.getProfesional(profesionalID)
+    if (profesionalState.value) {
+      useServiciosStore().currentProfesional = profesionalState.value
+    }
   }
 }
 

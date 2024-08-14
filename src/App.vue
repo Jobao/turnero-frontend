@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { watch } from 'vue'
+import { onBeforeRouteUpdate } from 'vue-router'
 </script>
 
 <template>
