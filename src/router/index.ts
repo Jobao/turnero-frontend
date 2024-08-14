@@ -44,15 +44,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-  console.log(to)
-  console.log(from)
   if (!from.name) {
     //Si entro desde la URL
     if (to.params.profesionalID) {
-      if (to.params.profesionalID === useServiciosStore().currentProfesional.professionalID.toString()) {
-        console.log('igual')
-      } else {
-        console.log('diferente')
+      if (to.params.profesionalID !== useServiciosStore().currentProfesional.professionalID.toString()) {
+        router.push('/')
       }
     }
   }

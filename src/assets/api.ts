@@ -3,9 +3,16 @@ import { fakeDataProfesional } from './fakeData'
 export const API = {
   local: {
     getProfesional(profesionalID: number) {
-      return fakeDataProfesional.find((profesional) => {
+      let returnedProfesional = fakeDataProfesional.find((profesional) => {
         return profesional.professionalID === profesionalID
       })
+      if (returnedProfesional) {
+        if (!returnedProfesional.services) {
+          returnedProfesional.services = []
+        }
+      }
+
+      return returnedProfesional
     }
   },
   laravel: {}
