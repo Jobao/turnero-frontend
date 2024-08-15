@@ -13,13 +13,13 @@ export const fakeDataProfesional: ProfesionalType[] = [
         serviceID: 0,
         title: 'Pedicuria',
         description: 'Cuidado de los pies',
-        shifts: [
+        availability: [
           { date: '10/08/2024', shedule: ['09:00', '09:30', '10:00'] },
           { date: '15/08/2024', shedule: ['09:00', '09:30', '10:00'] },
           { date: '29/10/2024', shedule: ['18:00', '19:00', '20:00'] }
         ]
       },
-      { serviceID: 1, title: 'Manicura', description: '', shifts: [] }
+      { serviceID: 1, title: 'Manicura', description: '', availability: [] }
     ]
   },
   {

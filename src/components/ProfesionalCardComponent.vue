@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="flex gap-2 px-2">
-        <button @click="toServiciosPage()" class="flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">Sacar turno</button>
+        <button @click="toServicesPage()" class="flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">Sacar turno</button>
         <WhatsappButtonComponent :phone="props.profesional.phone"></WhatsappButtonComponent>
       </div>
     </div>
@@ -25,12 +25,14 @@
 <script setup lang="ts">
 import type { ProfesionalType } from '@/types/types'
 import WhatsappButtonComponent from './WhatsappButtonComponent.vue'
-import { useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { URLS } from '@/assets/constants';
 
 const router = useRouter()
+const route = useRoute()
 const props = defineProps<{ profesional: ProfesionalType }>()
 
-function toServiciosPage() {
-  router.push('/' + props.profesional.professionalID + '/service')
+function toServicesPage() {
+  router.push(route.fullPath + URLS.SERVICE)
 }
 </script>

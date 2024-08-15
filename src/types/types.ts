@@ -12,7 +12,7 @@ export type ServiceType = {
   serviceID: number
   title: string
   description: string
-  shifts: ShiftType[]
+  availability: ShiftType[]
 }
 
 export type ShiftType = {

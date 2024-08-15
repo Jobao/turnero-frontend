@@ -3,35 +3,36 @@ import HomeView from '@/views/HomeView.vue'
 import ProfesionalView from '@/views/ProfesionalView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import ServicesView from '@/views/ServicesView.vue'
-import ShiftView from '@/views/ShiftView.vue'
+import AvaliabilityView from '@/views/AvailabilityView.vue'
 import SummaryView from '@/views/SummaryView.vue'
 import { useServiciosStore } from '@/stores/serviceStore'
+import { URLS } from '@/assets/constants'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: URLS.HOME,
       name: 'home',
       component: HomeView
     },
     {
-      path: '/:profesionalID',
+      path: URLS.PROFESSIONAL + '/:profesionalID',
       name: 'profesionalView',
       component: ProfesionalView
     },
     {
-      path: '/:profesionalID/service',
+      path: URLS.PROFESSIONAL + '/:profesionalID' + URLS.SERVICE,
       name: 'servicesView',
       component: ServicesView
     },
     {
-      path: '/:profesionalID/service/:serviceID',
+      path: URLS.PROFESSIONAL + '/:profesionalID' + URLS.SERVICE + '/:serviceID',
       name: 'shiftView',
-      component: ShiftView
+      component: AvaliabilityView
     },
     {
-      path: '/:profesionalID/service/:serviceID/summary',
+      path: URLS.PROFESSIONAL + '/:profesionalID' + URLS.SERVICE + '/:serviceID' + '/summary',
       name: 'summaryView',
       component: SummaryView
     },
