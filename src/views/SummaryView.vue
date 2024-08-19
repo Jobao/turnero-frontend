@@ -30,11 +30,22 @@ import { useServiciosStore } from '@/stores/serviceStore'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 dayjs.extend(customParseFormat)
 
 const userName = ref('')
 const lastName = ref('')
 const userPhone = ref('')
+const router = useRouter()
 
-function prueba() {}
+function control() {
+  console.log(useServiciosStore().currentShift)
+
+  if (useServiciosStore().currentShift.date === '') {
+    console.log('no existe fecha')
+    router.push('/')
+  }
+}
+
+control()
 </script>

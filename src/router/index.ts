@@ -7,6 +7,8 @@ import AvaliabilityView from '@/views/AvailabilityView.vue'
 import SummaryView from '@/views/SummaryView.vue'
 import { useServiciosStore } from '@/stores/serviceStore'
 import { URLS } from '@/assets/constants'
+import AdminDashboardView from '@/views/AdminDashboardView.vue'
+import AdminLoginView from '@/views/AdminLoginView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +17,16 @@ const router = createRouter({
       path: URLS.HOME,
       name: 'home',
       component: HomeView
+    },
+    {
+      path: URLS.ADMIN_DASHBOARD,
+      name: 'admin_dashboard',
+      component: AdminDashboardView
+    },
+    {
+      path: URLS.ADMIN_LOGIN,
+      name: 'admin_login',
+      component: AdminLoginView
     },
     {
       path: URLS.PROFESSIONAL + '/:profesionalID',
@@ -53,17 +65,6 @@ router.beforeEach((to, from) => {
       }
     }
   }
-  /*
-  if (to.params.profesionalID) {
-    if (from.params.profesionalID) {
-      if (from.params.profesionalID === to.params.profesionalID) {
-        return true
-      } else {
-        router.push('/')
-      }
-    }
-  }
-*/
   return true
 })
 

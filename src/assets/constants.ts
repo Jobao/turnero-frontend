@@ -3,5 +3,7 @@ export const URLS = {
   PROFESSIONAL: '/professionals',
   SERVICE: '/services',
   AVAILABILITY: '/availability',
-  APPOINTMENT: '/appointments'
+  APPOINTMENT: '/appointments',
+  ADMIN_DASHBOARD: '/dashboard',
+  ADMIN_LOGIN: '/login'
 }

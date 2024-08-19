@@ -32,3 +32,10 @@ export const fakeDataProfesional: ProfesionalType[] = [
     services: []
   }
 ]
+
+export let fakeDataAdmin = {
+  professionalID: 0,
+  imageURL: 'https://randomuser.me/api/portraits/men/21.jpg',
+  name: 'Rogelio BuenDia',
+  email: 'Rogelio@good.day'
+}
