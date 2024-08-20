@@ -1,6 +1,6 @@
 <template>
   <div v-if="profesionalState?.services !== undefined">
-    <ServiceShiftCardComponent :shifts="profesionalState.services[selectedService].availability" :locale="'es'"> </ServiceShiftCardComponent>
+    <ServiceAppointmentCardComponent :shifts="profesionalState.services[selectedService].availability" :locale="'es'"> </ServiceAppointmentCardComponent>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import { useServiciosStore } from '@/stores/serviceStore'
 import type { ProfesionalType } from '@/types/types'
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import ServiceShiftCardComponent from '@/components/ServiceShiftCardComponent.vue'
+import ServiceAppointmentCardComponent from '@/components/ServiceAppointmentCardComponent.vue'
 const route = useRoute()
 const router = useRouter()
 const selectedService = ref(Number(route.params.serviceID))
