@@ -17,10 +17,22 @@ export const fakeDataProfesional: ProfesionalType[] = [
           { date: '10/08/2024', shedule: ['09:00', '09:30', '10:00'] },
           { date: '15/08/2024', shedule: ['09:00', '09:30', '10:00'] },
           { date: '29/10/2024', shedule: ['18:00', '19:00', '20:00'] }
-        ]
+        ],
+        depositAmount: '6000'
       },
-      { serviceID: 1, title: 'Manicura', description: '', availability: [] }
-    ]
+      {
+        serviceID: 1,
+        title: 'Manicura',
+        description: '',
+        availability: [],
+        depositAmount: ''
+      }
+    ],
+    depositInfo: {
+      CBU: '000000000000000000000001',
+      alias: 'turno.turnero.manaos',
+      currency: '$'
+    }
   },
   {
     professionalID: 1,
@@ -29,7 +41,12 @@ export const fakeDataProfesional: ProfesionalType[] = [
     imageURL: 'https://randomuser.me/api/portraits/men/20.jpg',
     mapURL: '',
     phone: '',
-    services: []
+    services: [],
+    depositInfo: {
+      CBU: '',
+      alias: '',
+      currency: ''
+    }
   }
 ]
 

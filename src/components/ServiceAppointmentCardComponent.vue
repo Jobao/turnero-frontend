@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div v-for="shifts in props.shifts" class="flex border mb-2">
+    <div v-for="shifts in props.appointment" class="flex border mb-2">
       <div class="w-1/5">
         <div class="font-bold">{{ shifts.date }}</div>
         <div>{{ dayjs(shifts.date, 'DD/MM/YYYY').locale(currentLocale).format('dddd') }}</div>
@@ -18,11 +18,11 @@
 
 <script setup lang="ts">
 const props = defineProps<{
-  shifts: ShiftType[]
+  appointment: AppointmentType[]
   locale?: string
 }>()
 
-import type { ShiftType } from '@/types/types'
+import type { AppointmentType } from '@/types/types'
 import { localeData } from '@/assets/localeData'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
@@ -82,7 +82,7 @@ function defineLocale() {
 }
 
 function toSummaryPage() {
-  useServiciosStore().currentShift = {
+  useServiciosStore().currentAppointment = {
     date: selectedDateGroup.value,
     shedule: selectedShift.value
   }

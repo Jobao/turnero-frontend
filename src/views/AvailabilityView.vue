@@ -1,6 +1,6 @@
 <template>
   <div v-if="profesionalState?.services !== undefined">
-    <ServiceAppointmentCardComponent :shifts="profesionalState.services[selectedService].availability" :locale="'es'"> </ServiceAppointmentCardComponent>
+    <ServiceAppointmentCardComponent :appointment="profesionalState.services[selectedService].availability" :locale="'es'"> </ServiceAppointmentCardComponent>
   </div>
 </template>
 

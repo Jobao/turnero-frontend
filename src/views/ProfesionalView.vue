@@ -22,7 +22,6 @@ import { API } from '@/assets/api'
 import { ref } from 'vue'
 
 const route = useRoute()
-let currentProfessional: ProfesionalType
 const profesionalState = ref<ProfesionalType>()
 
 function getProfesional() {
