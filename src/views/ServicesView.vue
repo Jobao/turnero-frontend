@@ -75,3 +75,7 @@ function toTurnosView() {
   router.push(route.fullPath + '/' + selectedService.value)
 }
 </script>
+
+<!-- TODO
+add outline on service button
+-->

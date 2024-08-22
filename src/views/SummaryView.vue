@@ -1,17 +1,17 @@
 <template>
   <div class="flex flex-col">
     <div class="p-3">
-      <label for="nameInput">Nombre:</label>
-      <input required pattern="\w{3,120}" type="text" name="nameInput" id="nameInput" class="border" v-model="userName" />
+      <label for="nameInput" class="block text-sm font-medium text-gray-700">Nombre:</label>
+      <input required pattern="\w{3,120}" type="text" name="nameInput" id="nameInput" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-black" v-model="userName" />
     </div>
     <div class="p-3">
-      <label for="lastNameInput">Apellido:</label>
-      <input required pattern="\w{3,120}" type="text" name="lastNameInput" id="lastNameInput" class="border" v-model="lastName" />
+      <label for="lastNameInput" class="block text-sm font-medium text-gray-700">Apellido:</label>
+      <input required pattern="\w{3,120}" type="text" name="lastNameInput" id="lastNameInput" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-black" v-model="lastName" />
     </div>
 
     <div class="p-3">
-      <label for="phoneInput">Telefono:</label>
-      <input type="tel" name="phoneInput" id="phoneInput" class="border" pattern="" v-model="userPhone" />
+      <label for="phoneInput" class="block text-sm font-medium text-gray-700">Telefono:</label>
+      <input type="tel" name="phoneInput" id="phoneInput" class="border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-black" pattern="" v-model="userPhone" />
     </div>
   </div>
 
