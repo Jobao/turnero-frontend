@@ -57,15 +57,16 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-  if (!from.name) {
+  return true
+  /*if (!from.name) {
     //Si entro desde la URL
     if (to.params.profesionalID) {
-      if (to.params.profesionalID !== useServiciosStore().currentProfesional.professionalID.toString()) {
+      if (to.params.profesionalID !== useServiciosStore().currentProfesional._id.toString()) {
         router.push('/')
       }
     }
   }
-  return true
+  return true*/
 })
 
 export default router

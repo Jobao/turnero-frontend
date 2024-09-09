@@ -2,15 +2,15 @@
   <div class="">
     <div v-for="shifts in props.appointment" class="flex border mb-2">
       <div class="w-1/5">
-        <div class="font-bold">{{ shifts.date }}</div>
-        <div>{{ dayjs(shifts.date, 'DD/MM/YYYY').locale(currentLocale).format('dddd') }}</div>
+        <div class="font-bold">{{ shifts.day }}</div>
+        <div>{{ dayjs(shifts.day, 'DD/MM/YYYY').locale(currentLocale).format('dddd') }}</div>
       </div>
       <div>
         <p>{{ localeData.getLocale(currentLocale).AVALIABLE_SHIFTS }}</p>
-        <button v-for="shedule in shifts.shedule" class="border m-1 bg-gray-300" :key="shifts.date + shedule" :class="isSelectedButtonShedule(shifts.date + '||' + shedule) ? 'bg-green-300' : ''" @click="selectButtonShedule(shifts.date + '||' + shedule)">{{ shedule }}</button>
+        <button v-for="shedule in shifts.time" class="border m-1 bg-gray-300" :key="shifts.day + shedule" :class="isSelectedButtonShedule(shifts.day + '||' + shedule) ? 'bg-green-300' : ''" @click="selectButtonShedule(shifts.day + '||' + shedule)">{{ shedule }}</button>
       </div>
       <div class="self-center align-middle items-center pl-2">
-        <button class="border-2" :class="generateNextButtonClassStyle(shifts.date)" @click="toSummaryPage()">Reservar</button>
+        <button class="border-2" :class="generateNextButtonClassStyle(shifts.day)" @click="toSummaryPage()">Reservar</button>
       </div>
     </div>
   </div>

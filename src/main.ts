@@ -5,7 +5,6 @@ import App from './App.vue'
 import './index.css'
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
-
 import DatePicker from 'primevue/datepicker'
 
 const app = createApp(App)

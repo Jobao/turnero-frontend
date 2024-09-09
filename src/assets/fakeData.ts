@@ -2,7 +2,7 @@ import type { ProfesionalType } from '@/types/types'
 
 export const fakeDataProfesional: ProfesionalType[] = [
   {
-    professionalID: 0,
+    _id: 0,
     name: 'Rogelio BuenDia',
     description: 'Estetica',
     imageURL: 'https://randomuser.me/api/portraits/men/21.jpg',
@@ -10,18 +10,18 @@ export const fakeDataProfesional: ProfesionalType[] = [
     phone: '542236703240',
     services: [
       {
-        serviceID: 0,
+        _id: 0,
         title: 'Pedicuria',
         description: 'Cuidado de los pies',
         availability: [
-          { date: '10/08/2024', shedule: ['09:00', '09:30', '10:00'] },
-          { date: '15/08/2024', shedule: ['09:00', '09:30', '10:00'] },
-          { date: '29/10/2024', shedule: ['18:00', '19:00', '20:00'] }
+          { day: '10/08/2024', time: ['09:00', '09:30', '10:00'] },
+          { day: '15/08/2024', time: ['09:00', '09:30', '10:00'] },
+          { day: '29/10/2024', time: ['18:00', '19:00', '20:00'] }
         ],
         depositAmount: '6000'
       },
       {
-        serviceID: 1,
+        _id: 1,
         title: 'Manicura',
         description: '',
         availability: [],
@@ -35,7 +35,7 @@ export const fakeDataProfesional: ProfesionalType[] = [
     }
   },
   {
-    professionalID: 1,
+    _id: 1,
     name: 'Pepe Argento',
     description: 'Zapatero',
     imageURL: 'https://randomuser.me/api/portraits/men/20.jpg',

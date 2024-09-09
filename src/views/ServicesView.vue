@@ -1,10 +1,8 @@
 <template>
   <div v-if="profesionalState">
     <div v-if="profesionalState.services && profesionalState.services.length > 0" class="flex">
-      <ServiceCardComponent v-for="serviceItem in profesionalState.services" :title="serviceItem.title" :descripcion="serviceItem.description" :idServicio="serviceItem.serviceID" :onSelect="serviceSelection" :select="serviceItem.serviceID === selectedService" :key="serviceItem.serviceID">
-      </ServiceCardComponent>
-
-      <button class="px-4 py-2 rounded-full" :class="siguienteButtonClass" @click="toTurnosView()">{{ localeData.getLocale('es').NEXT_BUTTON }}</button>
+      <ServiceCardComponent v-for="serviceItem in profesionalState.services" :title="serviceItem.title" :description="serviceItem.description" :_id="serviceItem._id" :onSelect="serviceSelection" :selected="serviceItem._id === selectedService" :key="serviceItem._id"> </ServiceCardComponent>
+      <RouterLink class="flex px-4 py-2 rounded-full text-center align-middle items-center" :class="selectedService !== '' ? 'bg-blue-600' : 'pointer-events-none bg-gray-400'" :to="route.fullPath + '/' + selectedService">{{ localeData.getLocale('es').NEXT_BUTTON }}</RouterLink>
     </div>
 
     <div v-else>
@@ -17,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ServiceCardComponent from '@/components/ServiceCardComponent.vue'
 import type { ProfesionalType, ServiceType } from '@/types/types'
@@ -26,16 +24,17 @@ import { API } from '@/assets/api'
 import { localeData } from '@/assets/localeData'
 
 const route = useRoute()
-const router = useRouter()
-const selectedService = ref(-1)
+const selectedService = ref('')
 const profesionalState = ref<ProfesionalType>()
 
-function getProfesional() {
-  const profesionalID = Number(route.params.profesionalID)
+onMounted(() => {
+  getProfesional()
+})
 
+async function getProfesional() {
   if (useServiciosStore().currentProfesional) {
-    if (useServiciosStore().currentProfesional?.professionalID !== profesionalID) {
-      profesionalState.value = API.local.getProfesional(Number(route.params.profesionalID))
+    if (useServiciosStore().currentProfesional?._id !== route.params.profesionalID) {
+      profesionalState.value = await API.node.getProfessionalData(route.params.profesionalID)
       if (profesionalState.value) {
         useServiciosStore().currentProfesional = profesionalState.value
       }
@@ -43,36 +42,20 @@ function getProfesional() {
       profesionalState.value = useServiciosStore().currentProfesional
     }
   } else {
-    profesionalState.value = API.local.getProfesional(profesionalID)
+    profesionalState.value = await API.node.getProfessionalData(route.params.profesionalID)
     if (profesionalState.value) {
       useServiciosStore().currentProfesional = profesionalState.value
     }
   }
 }
 
-getProfesional()
-
-function serviceSelection(serviceID: number) {
+function serviceSelection(serviceID: string) {
   if (serviceID === selectedService.value) {
-    selectedService.value = -1
+    selectedService.value = ''
   } else {
     selectedService.value = serviceID
   }
   useServiciosStore().selectedService = selectedService.value
-}
-
-const siguienteButtonClass = computed({
-  get: () => {
-    if (selectedService.value >= 0) {
-      return 'bg-blue-600 '
-    }
-    return ' pointer-events-none bg-gray-400'
-  },
-  set: (val) => {}
-})
-
-function toTurnosView() {
-  router.push(route.fullPath + '/' + selectedService.value)
 }
 </script>
 

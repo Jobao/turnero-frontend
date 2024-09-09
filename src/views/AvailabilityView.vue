@@ -1,6 +1,10 @@
 <template>
-  <div v-if="profesionalState?.services !== undefined">
-    <ServiceAppointmentCardComponent :appointment="profesionalState.services[selectedService].availability" :locale="'es'"> </ServiceAppointmentCardComponent>
+  <div v-if="profesionalState?.services !== undefined && profesionalState?.services.length > 0">
+    <ServiceAppointmentCardComponent :appointment="availability" :locale="'es'"> </ServiceAppointmentCardComponent>
+  </div>
+  <div v-else>
+    <p>No hay turnos disponibles</p>
+    <RouterLink :to="''">Atras</RouterLink>
   </div>
 </template>
 
@@ -8,20 +12,28 @@
 import { API } from '@/assets/api'
 import { useServiciosStore } from '@/stores/serviceStore'
 import type { ProfesionalType } from '@/types/types'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import ServiceAppointmentCardComponent from '@/components/ServiceAppointmentCardComponent.vue'
 const route = useRoute()
 const router = useRouter()
-const selectedService = ref(Number(route.params.serviceID))
+const selectedService = ref(route.params.serviceID)
 const profesionalState = ref<ProfesionalType>()
+const availability = ref()
 
-function getProfesional() {
-  const profesionalID = Number(route.params.profesionalID)
+onMounted(() => {
+  getProfesional()
+  API.node.getAvailability(useServiciosStore().currentProfesional._id, selectedService.value).then((x) => {
+    availability.value = x
+  })
+  /*const aval = API.node.getAvailability(useServiciosStore().currentProfesional._id, selectedService.value)
+  console.log(aval)*/
+})
 
+async function getProfesional() {
   if (useServiciosStore().currentProfesional) {
-    if (useServiciosStore().currentProfesional?.professionalID !== profesionalID) {
-      profesionalState.value = API.local.getProfesional(Number(route.params.profesionalID))
+    if (useServiciosStore().currentProfesional?._id !== route.params.profesionalID) {
+      profesionalState.value = await API.node.getProfessionalData(route.params.profesionalID)
       if (profesionalState.value) {
         useServiciosStore().currentProfesional = profesionalState.value
       }
@@ -29,12 +41,10 @@ function getProfesional() {
       profesionalState.value = useServiciosStore().currentProfesional
     }
   } else {
-    profesionalState.value = API.local.getProfesional(profesionalID)
+    profesionalState.value = await API.node.getProfessionalData(route.params.profesionalID)
     if (profesionalState.value) {
       useServiciosStore().currentProfesional = profesionalState.value
     }
   }
 }
-
-getProfesional()
 </script>

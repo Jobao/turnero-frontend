@@ -1,5 +1,5 @@
 export type ProfesionalType = {
-  professionalID: number
+  _id: string
   name: string
   description: string
   imageURL: string
@@ -10,7 +10,7 @@ export type ProfesionalType = {
 }
 
 export type ServiceType = {
-  serviceID: number
+  _id: string
   title: string
   description: string
   depositAmount: string
@@ -18,8 +18,8 @@ export type ServiceType = {
 }
 
 export type AppointmentType = {
-  date: string
-  shedule: string[]
+  day: string
+  time: string[]
 }
 
 export type DepositInfoType = {
